@@ -1,3 +1,3 @@
-module randomman552/drone-build-reporter
+module build-reporter
 
 go 1.21.3

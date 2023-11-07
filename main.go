@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	reporters "build-reporter/reporters"
+)
 
 func main() {
-	fmt.Println("Hello World!")
+	context := reporters.ReporterContext{Message: "Hello World!"}
+
+	reporter := new(reporters.ConsoleReporter)
+	reporter.Report(context)
 }
