@@ -1,12 +1,12 @@
 package main
 
-import (
-	reporters "build-reporter/reporters"
-)
+import "reporter/types"
 
 func main() {
-	context := reporters.DroneContext{}
+	plugin := Plugin{
+		Config:  types.Config{},
+		Context: types.DroneContext{},
+	}
 
-	reporter := new(reporters.ConsoleReporter)
-	reporter.Report(context)
+	plugin.Run()
 }

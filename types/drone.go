@@ -1,4 +1,4 @@
-package reporters
+package types
 
 type DroneContext struct {
 	Build        BuildContext
