@@ -16,11 +16,11 @@ type BuildContext struct {
 	Action   string
 	Created  string
 	Event    string
-	Finished string
 	Link     string
 	Number   string
 	Parent   string
-	Started  string
+	Started  uint
+	Finished uint
 	Status   string
 	Trigger  string
 }
