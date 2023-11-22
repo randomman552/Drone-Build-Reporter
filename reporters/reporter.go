@@ -1,5 +1,5 @@
 package reporters
 
 type Reporter interface {
-	Report(ReporterContext)
+	Report(DroneContext)
 }

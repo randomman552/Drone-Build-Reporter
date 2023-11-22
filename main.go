@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	context := reporters.ReporterContext{Message: "Hello World!"}
+	context := reporters.DroneContext{}
 
 	reporter := new(reporters.ConsoleReporter)
 	reporter.Report(context)

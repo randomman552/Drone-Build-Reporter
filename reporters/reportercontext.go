@@ -1,9 +1,5 @@
 package reporters
 
-type ReporterContext struct {
-	Message string
-}
-
 type DroneContext struct {
 	Build        BuildContext
 	Commit       CommitContext
