@@ -11,7 +11,12 @@ type Plugin struct {
 }
 
 func (p Plugin) Run() {
-	reporter := reporters.ConsoleReporter{Config: p.Config}
+	reporters := []types.Reporter{
+		reporters.ConsoleReporter{Config: p.Config},
+		reporters.GotifyReporter{Config: p.Config},
+	}
 
-	reporter.Report(p.Context)
+	for _, reporter := range reporters {
+		reporter.Report(p.Context)
+	}
 }

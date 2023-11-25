@@ -15,6 +15,15 @@ func main() {
 	app.Usage = "Build Reporter Plugin"
 	app.Action = run
 	app.Flags = []cli.Flag{
+		// Config parameters
+		cli.StringFlag{
+			Name:   "config.gotify.token",
+			EnvVar: "PLUGIN_GOTIFY_TOKEN",
+		},
+		cli.StringFlag{
+			Name:   "config.gotify.url",
+			EnvVar: "PLUGIN_GOTIFY_URL",
+		},
 		// Build context parameters
 		cli.StringFlag{
 			Name:   "build.action",
@@ -148,7 +157,10 @@ func main() {
 
 func run(c *cli.Context) {
 	plugin := Plugin{
-		Config: types.Config{},
+		Config: types.Config{
+			GotifyToken: c.String("config.gotify.token"),
+			GotifyUrl:   c.String("config.gotify.url"),
+		},
 		Context: types.DroneContext{
 			Build: types.BuildContext{
 				Action:   c.String("build.action"),
