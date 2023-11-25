@@ -1,0 +1,25 @@
+kind: pipeline
+type: docker
+name: Push Image
+
+trigger:
+  branch:
+    - main
+  event:
+    exclude:
+      - pull_request
+
+steps:
+  # Build
+  - name: docker-image
+    image: plugins/docker
+    environment:
+      DOCKER_BUILDKIT: 1
+    settings:
+      username:
+        from_secret: docker-user
+      password:
+        from_secret: docker-key
+      repo: randomman552/drone-build-reporter
+      tags:
+        - latest
