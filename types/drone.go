@@ -10,28 +10,28 @@ type DroneContext struct {
 
 type BuildContext struct {
 	Action   string
-	Created  string
-	Event    string
-	Link     string
-	Number   string
-	Parent   string
+	Created  uint
 	Started  uint
 	Finished uint
+	Event    string
+	Link     string
+	Number   int
+	Parent   int
 	Status   string
 	Trigger  string
 }
 
 type CommitContext struct {
-	Commit       string
+	Hash         string
+	Before       string
 	After        string
 	Author       string
 	AuthorAvatar string
 	AuthorEmail  string
-	Before       string
+	AuthorName   string
 	Link         string
 	Message      string
 	Ref          string
-	SHA          string
 }
 
 type RepoContext struct {
@@ -41,6 +41,5 @@ type RepoContext struct {
 	Namespace  string
 	Owner      string
 	Private    bool
-	Type       string
 	Visibility string
 }

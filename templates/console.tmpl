@@ -1,25 +1,26 @@
 -- Build --
 Action - {{ .Build.Action }}
 Created - {{ .Build.Created }}
+Started - {{ .Build.Started }}
+Finished - {{ .Build.Finished }}
 Event - {{ .Build.Event }}
 Link - {{ .Build.Link }}
 Number - {{ .Build.Number }}
 Parent - {{ .Build.Parent }}
-Started - {{ .Build.Started }}
-Finished - {{ .Build.Finished }}
 Status - {{ .Build.Status }}
 
 -- Commit --
-Commit - {{ .Commit.Commit }}
-After - {{ .Commit.After }}
-Author - {{ .Commit.Author }}
-Avatar - {{ .Commit.AuthorAvatar }}
-Email - {{ .Commit.AuthorEmail }}
+Hash - {{ .Commit.Hash }}
 Before - {{ .Commit.Before }}
-Link - {{ .Commit.Link }}
+After - {{ .Commit.After }}
 Message - {{ .Commit.Message }}
+Link - {{ .Commit.Link }}
 Ref - {{ .Commit.Ref }}
-SHA - {{ .Commit.SHA }}
+Author - {{ .Commit.Author }}
+    Avatar - {{ .Commit.AuthorAvatar }}
+    Email - {{ .Commit.AuthorEmail }}
+    Name - {{ .Commit.AuthorName }}
+
 
 -- Repo --
 Branch - {{ .Repo.Branch }}
@@ -28,7 +29,6 @@ Name - {{ .Repo.Name }}
 Namespace - {{ .Repo.Namespace }}
 Owner - {{ .Repo.Owner }}
 Private - {{ .Repo.Private }}
-Type - {{ .Repo.Type }}
 Visibility - {{ .Repo.Visibility }}
 
 -- Failed Stages --
