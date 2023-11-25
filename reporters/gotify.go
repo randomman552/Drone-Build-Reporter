@@ -2,6 +2,7 @@ package reporters
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
@@ -32,27 +33,38 @@ func (r GotifyReporter) GetUrl() *url.URL {
 }
 
 func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer {
-	tplate, err := template.ParseFiles("templates/gotify/request.tmpl", "templates/gotify/message.tmpl")
+	tplate, err := template.ParseFiles("templates/gotify.tmpl")
 
 	if err != nil {
 		panic(err)
 	}
 
-	// Render message template
+	// Build markdown from template
 	messageBuffer := &bytes.Buffer{}
-	tplate.ExecuteTemplate(messageBuffer, "message", context)
-	messageBytes, err := io.ReadAll(messageBuffer)
+	tplate.Execute(messageBuffer, context)
+	messageBytes, _ := io.ReadAll(messageBuffer)
 	messageString := string(messageBytes)
 
-	// Render request template
-	gotifyContext := types.GotifyRequestContext{
-		Drone:   context,
-		Message: messageString,
+	// Build JSON request
+	request := types.MessageRequest{
+		Title:    context.Build.Status + " for " + context.Repo.Namespace + "/" + context.Repo.Name,
+		Message:  messageString,
+		Priority: 5,
+		Extras: types.MessageRequestExtras{
+			Display: types.MessageRequestExtrasDisplay{
+				ContentType: "text/markdown",
+			},
+			Notification: types.MessageRequestExtrasNotification{
+				Click: types.MessageRequestExtrasNotificationClick{
+					Url: context.Build.Link,
+				},
+			},
+		},
 	}
-	buffer := &bytes.Buffer{}
-	tplate.ExecuteTemplate(buffer, "request", gotifyContext)
+	requestBuffer := &bytes.Buffer{}
+	json.NewEncoder(requestBuffer).Encode(request)
 
-	return buffer
+	return requestBuffer
 }
 
 func (r GotifyReporter) BuildRequest(context types.DroneContext) *http.Request {
