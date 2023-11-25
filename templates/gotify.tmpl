@@ -1,0 +1,15 @@
+{
+    "title": "{{ .Build.Status }} for {{ .Repo.Namespace }}/{{ .Repo.Name }}",
+    "message": "TODO",
+    "priority": 5,
+    "extras": {
+        "client::display": {
+            "contentType": "text/markdown"
+        },
+        "client::notification": {
+            "click": {
+                "url": "{{ .Build.Link }}"
+            }
+        }
+    }
+}
