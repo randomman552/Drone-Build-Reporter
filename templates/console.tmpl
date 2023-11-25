@@ -1,0 +1,42 @@
+-- Build --
+Action - {{ .Build.Action }}
+Created - {{ .Build.Created }}
+Event - {{ .Build.Event }}
+Link - {{ .Build.Link }}
+Number - {{ .Build.Number }}
+Parent - {{ .Build.Parent }}
+Started - {{ .Build.Started }}
+Finished - {{ .Build.Finished }}
+Status - {{ .Build.Status }}
+
+-- Commit --
+Commit - {{ .Commit.Commit }}
+After - {{ .Commit.After }}
+Author - {{ .Commit.Author }}
+Avatar - {{ .Commit.AuthorAvatar }}
+Email - {{ .Commit.AuthorEmail }}
+Before - {{ .Commit.Before }}
+Link - {{ .Commit.Link }}
+Message - {{ .Commit.Message }}
+Ref - {{ .Commit.Ref }}
+SHA - {{ .Commit.SHA }}
+
+-- Repo --
+Branch - {{ .Repo.Branch }}
+Link - {{ .Repo.Link }}
+Name - {{ .Repo.Name }}
+Namespace - {{ .Repo.Namespace }}
+Owner - {{ .Repo.Owner }}
+Private - {{ .Repo.Private }}
+Type - {{ .Repo.Type }}
+Visibility - {{ .Repo.Visibility }}
+
+-- Failed Stages --
+{{ if not .FailedStages }}No failed stages
+{{ else }}{{ range .FailedStages }}
+{{ . }}{{ end }}{{ end }}
+
+-- Failed Steps --
+{{ if not .FailedSteps }}No failed steps
+{{ else }}{{ range .FailedSteps }}
+{{ . }}{{ end }}{{ end }}
