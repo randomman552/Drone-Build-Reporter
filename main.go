@@ -76,7 +76,7 @@ func main() {
 		},
 		cli.StringFlag{
 			Name:   "commit.after",
-			EnvVar: "DRONE_COMMIT_AFTEr",
+			EnvVar: "DRONE_COMMIT_AFTER",
 		},
 		cli.StringFlag{
 			Name:   "commit.author",
