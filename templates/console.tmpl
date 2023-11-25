@@ -21,7 +21,6 @@ Author - {{ .Commit.Author }}
     Email - {{ .Commit.AuthorEmail }}
     Name - {{ .Commit.AuthorName }}
 
-
 -- Repo --
 Branch - {{ .Repo.Branch }}
 Link - {{ .Repo.Link }}
@@ -33,10 +32,8 @@ Visibility - {{ .Repo.Visibility }}
 
 -- Failed Stages --
 {{ if not .FailedStages }}No failed stages
-{{ else }}{{ range .FailedStages }}
-{{ . }}{{ end }}{{ end }}
+{{ else }}{{ range .FailedStages }}{{ . }}{{ end }}{{ end }}
 
 -- Failed Steps --
 {{ if not .FailedSteps }}No failed steps
-{{ else }}{{ range .FailedSteps }}
-{{ . }}{{ end }}{{ end }}
+{{ else }}{{ range .FailedSteps }}{{ . }}{{ end }}{{ end }}
