@@ -1,6 +1,10 @@
 Build `{{ .Build.Number }}` triggered by `{{ .Build.Event }}` on `{{ .Repo.Branch }}` branch
 
-Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by {{ .Commit.AuthorName }}({{ .Commit.Author }})
+Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }})
+Author: {{ .Commit.AuthorName -}}
+{{- if .Commit.Author }}
+    ({{- .Commit.Author -}})
+{{- end }}
 
 [View build]({{ .Build.Link }})
 
