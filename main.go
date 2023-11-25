@@ -183,6 +183,8 @@ func run(c *cli.Context) {
 				Private:    c.Bool("repo.private"),
 				Visibility: c.String("repo.visibility"),
 			},
+			FailedStages: c.StringSlice("failed_stages"),
+			FailedSteps:  c.StringSlice("failed_steps"),
 		},
 	}
 
