@@ -1,6 +1,6 @@
 {
-    "title": "{{ .Build.Status }} for {{ .Repo.Namespace }}/{{ .Repo.Name }}",
-    "message": "TODO",
+    "title": "{{ .Drone.Build.Status }} for {{ .Drone.Repo.Namespace }}/{{ .Drone.Repo.Name }}",
+    "message": "{{ .Message }}",
     "priority": 5,
     "extras": {
         "client::display": {
@@ -8,7 +8,7 @@
         },
         "client::notification": {
             "click": {
-                "url": "{{ .Build.Link }}"
+                "url": "{{ .Drone.Build.Link }}"
             }
         }
     }

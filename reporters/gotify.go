@@ -32,14 +32,25 @@ func (r GotifyReporter) GetUrl() *url.URL {
 }
 
 func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer {
-	tplate, err := template.ParseFiles("templates/gotify.tmpl")
+	tplate, err := template.ParseFiles("templates/gotify/request.tmpl", "templates/gotify/message.tmpl")
 
 	if err != nil {
 		panic(err)
 	}
 
+	// Render message template
+	messageBuffer := &bytes.Buffer{}
+	tplate.ExecuteTemplate(messageBuffer, "message", context)
+	messageBytes, err := io.ReadAll(messageBuffer)
+	messageString := string(messageBytes)
+
+	// Render request template
+	gotifyContext := types.GotifyRequestContext{
+		Drone:   context,
+		Message: messageString,
+	}
 	buffer := &bytes.Buffer{}
-	tplate.Execute(buffer, context)
+	tplate.ExecuteTemplate(buffer, "request", gotifyContext)
 
 	return buffer
 }
