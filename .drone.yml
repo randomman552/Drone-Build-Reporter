@@ -27,3 +27,8 @@ steps:
   # Reporting
   - name: build-reporter
     image: randomman552/drone-build-reporter
+    settings:
+      gotify-token:
+        from_secret: gotify-token
+      gotify-url:
+        from_secret: gotify-url
