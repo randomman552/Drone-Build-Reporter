@@ -23,3 +23,7 @@ steps:
       repo: randomman552/drone-build-reporter
       tags:
         - latest
+
+  # Reporting
+  - name: build-reporter
+    image: randomman552/drone-build-reporter
