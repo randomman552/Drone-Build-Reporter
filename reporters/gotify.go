@@ -33,7 +33,7 @@ func (r GotifyReporter) GetUrl() *url.URL {
 }
 
 func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer {
-	tplate, err := template.ParseFiles("templates/gotify.tmpl")
+	tplate, err := template.ParseFiles("/templates/gotify.tmpl")
 
 	if err != nil {
 		panic(err)

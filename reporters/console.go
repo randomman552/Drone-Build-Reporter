@@ -11,7 +11,7 @@ type ConsoleReporter struct {
 }
 
 func (c ConsoleReporter) Report(context types.DroneContext) {
-	tplate, err := template.ParseFiles("templates/console.tmpl")
+	tplate, err := template.ParseFiles("/templates/console.tmpl")
 
 	if err != nil {
 		panic(err)
