@@ -1,8 +1,8 @@
-Build `{{ .Build.Number }}` triggered by `{{ .Build.Event }}` on `{{ .Repo.Branch }}`
+Build {{ .Build.Number }} triggered by {{ .Build.Event }} on {{ .Repo.Branch }}
 
 Took {{ .Build.Duration }}
 
-Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }})
+Commit: [{{ .Commit.Message }}]({{ .Commit.Link }})
 
 Author: {{ .Commit.AuthorName -}}
 {{- if .Commit.Author }}
