@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"reporter/types"
+	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/urfave/cli"
@@ -29,9 +30,17 @@ func main() {
 			Name:   "build.action",
 			EnvVar: "DRONE_BUILD_ACTION",
 		},
-		cli.UintFlag{
+		cli.Int64Flag{
 			Name:   "build.created",
 			EnvVar: "DRONE_BUILD_CREATED",
+		},
+		cli.Int64Flag{
+			Name:   "build.started",
+			EnvVar: "DRONE_BUILD_STARTED",
+		},
+		cli.Int64Flag{
+			Name:   "build.finished",
+			EnvVar: "DRONE_BUILD_FINISHED",
 		},
 		cli.StringFlag{
 			Name:   "build.event",
@@ -48,14 +57,6 @@ func main() {
 		cli.IntFlag{
 			Name:   "build.parent",
 			EnvVar: "DRONE_BUILD_PARENT",
-		},
-		cli.UintFlag{
-			Name:   "build.started",
-			EnvVar: "DRONE_BUILD_STARTED",
-		},
-		cli.UintFlag{
-			Name:   "build.finished",
-			EnvVar: "DRONE_BUILD_FINISHED",
 		},
 		cli.StringFlag{
 			Name:   "build.status",
@@ -156,6 +157,10 @@ func main() {
 }
 
 func run(c *cli.Context) {
+	buildCreated := time.Unix(c.Int64("build.created"), 0)
+	buildStarted := time.Unix(c.Int64("build.started"), 0)
+	buildFinished := time.Unix(c.Int64("build.finished"), 0)
+
 	plugin := Plugin{
 		Config: types.Config{
 			GotifyToken: c.String("config.gotify.token"),
@@ -164,9 +169,9 @@ func run(c *cli.Context) {
 		Context: types.DroneContext{
 			Build: types.BuildContext{
 				Action:   c.String("build.action"),
-				Created:  c.Uint("build.created"),
-				Started:  c.Uint("build.started"),
-				Finished: c.Uint("build.finished"),
+				Created:  &buildCreated,
+				Started:  &buildStarted,
+				Finished: &buildFinished,
 				Event:    c.String("build.event"),
 				Link:     c.String("build.link"),
 				Number:   c.Int("build.number"),

@@ -1,5 +1,7 @@
 package types
 
+import "time"
+
 type DroneContext struct {
 	Build        BuildContext
 	Commit       CommitContext
@@ -10,9 +12,9 @@ type DroneContext struct {
 
 type BuildContext struct {
 	Action   string
-	Created  uint
-	Started  uint
-	Finished uint
+	Created  *time.Time
+	Started  *time.Time
+	Finished *time.Time
 	Event    string
 	Link     string
 	Number   int
