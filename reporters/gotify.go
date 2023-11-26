@@ -47,9 +47,15 @@ func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer
 	messageBytes, _ := io.ReadAll(messageBuffer)
 	messageString := string(messageBytes)
 
+	// Build title
+	titleBuffer := &bytes.Buffer{}
+	tplate.ExecuteTemplate(titleBuffer, "title", context)
+	titleBytes, _ := io.ReadAll(titleBuffer)
+	titleString := string(titleBytes)
+
 	// Build JSON request
 	request := types.MessageRequest{
-		Title:    context.Build.Status + " for " + context.Repo.Namespace + "/" + context.Repo.Name,
+		Title:    titleString,
 		Message:  messageString,
 		Priority: 5,
 		Extras: types.MessageRequestExtras{

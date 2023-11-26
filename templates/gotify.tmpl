@@ -1,5 +1,7 @@
 Build `{{ .Build.Number }}` triggered by `{{ .Build.Event }}` on `{{ .Repo.Branch }}`
 
+Took {{ .Build.Duration }}
+
 Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }})
 
 Author: {{ .Commit.AuthorName -}}
@@ -7,9 +9,10 @@ Author: {{ .Commit.AuthorName -}}
     ({{- .Commit.Author -}})
 {{- end }}
 
-Finished at: {{ .Build.Finished }}\n
-Took {{ .Build.Duration }}
-
 [View build]({{ .Build.Link }})
 
 [View source]({{ .Repo.Link }})
+
+{{- define "title" -}}
+    {{ .Repo.Namespace }}/{{ .Repo.Name }} build {{ .Build.Status }}
+{{- end -}}
