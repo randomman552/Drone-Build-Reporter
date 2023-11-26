@@ -2,6 +2,7 @@ package reporters
 
 import (
 	"os"
+	"path"
 	"reporter/types"
 	"text/template"
 )
@@ -11,7 +12,8 @@ type ConsoleReporter struct {
 }
 
 func (c ConsoleReporter) Report(context types.DroneContext) {
-	tplate, err := template.ParseFiles("/templates/console.tmpl")
+	templatePath := path.Join(c.Config.TemplateDirectory, "console.tmpl")
+	tplate, err := template.ParseFiles(templatePath)
 
 	if err != nil {
 		panic(err)

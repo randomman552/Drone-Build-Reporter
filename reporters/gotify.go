@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"path"
 	"reporter/types"
 	"text/template"
 )
@@ -33,7 +34,8 @@ func (r GotifyReporter) GetUrl() *url.URL {
 }
 
 func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer {
-	tplate, err := template.ParseFiles("/templates/gotify.tmpl")
+	templatePath := path.Join(r.Config.TemplateDirectory, "gotify.tmpl")
+	tplate, err := template.ParseFiles(templatePath)
 
 	if err != nil {
 		panic(err)

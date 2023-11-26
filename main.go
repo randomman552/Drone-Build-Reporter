@@ -18,6 +18,11 @@ func main() {
 	app.Flags = []cli.Flag{
 		// Config parameters
 		cli.StringFlag{
+			Name:   "config.template_directory",
+			EnvVar: "PLUGIN_TEMPLATE_DIRECTORY",
+			Value:  "./templates",
+		},
+		cli.StringFlag{
 			Name:   "config.gotify.token",
 			EnvVar: "PLUGIN_GOTIFY_TOKEN",
 		},
@@ -163,8 +168,9 @@ func run(c *cli.Context) {
 
 	plugin := Plugin{
 		Config: types.Config{
-			GotifyToken: c.String("config.gotify.token"),
-			GotifyUrl:   c.String("config.gotify.url"),
+			TemplateDirectory: c.String("config.template_directory"),
+			GotifyToken:       c.String("config.gotify.token"),
+			GotifyUrl:         c.String("config.gotify.url"),
 		},
 		Context: types.DroneContext{
 			Build: types.BuildContext{
