@@ -7,6 +7,9 @@ Author: {{ .Commit.AuthorName -}}
     ({{- .Commit.Author -}})
 {{- end }}
 
+Finished at: {{ .Build.Finished }}\n
+Took {{ .Build.Duration }}
+
 [View build]({{ .Build.Link }})
 
 [View source]({{ .Repo.Link }})

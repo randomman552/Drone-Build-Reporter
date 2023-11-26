@@ -15,6 +15,7 @@ type BuildContext struct {
 	Created  *time.Time
 	Started  *time.Time
 	Finished *time.Time
+	Duration *time.Duration
 	Event    string
 	Link     string
 	Number   int

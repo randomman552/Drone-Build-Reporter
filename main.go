@@ -165,6 +165,7 @@ func run(c *cli.Context) {
 	buildCreated := time.Unix(c.Int64("build.created"), 0)
 	buildStarted := time.Unix(c.Int64("build.started"), 0)
 	buildFinished := time.Unix(c.Int64("build.finished"), 0)
+	buildDuration := buildFinished.Sub(buildCreated)
 
 	plugin := Plugin{
 		Config: types.Config{
@@ -178,6 +179,7 @@ func run(c *cli.Context) {
 				Created:  &buildCreated,
 				Started:  &buildStarted,
 				Finished: &buildFinished,
+				Duration: &buildDuration,
 				Event:    c.String("build.event"),
 				Link:     c.String("build.link"),
 				Number:   c.Int("build.number"),
