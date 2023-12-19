@@ -91,11 +91,11 @@ func (r GotifyReporter) BuildRequest(context types.DroneContext) *http.Request {
 
 func (r GotifyReporter) Report(context types.DroneContext) {
 	if len(r.Config.GotifyUrl) <= 0 {
-		log.Println("Missing URL")
+		log.Println("Missing Gotify URL")
 		return
 	}
 	if len(r.Config.GotifyToken) <= 0 {
-		log.Println("Missing token")
+		log.Println("Missing Gotify token")
 		return
 	}
 
