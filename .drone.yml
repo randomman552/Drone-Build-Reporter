@@ -32,3 +32,5 @@ steps:
         from_secret: gotify-token
       gotify_url:
         from_secret: gotify-url
+      discord_webhook:
+        from_secret: discord-webhook
