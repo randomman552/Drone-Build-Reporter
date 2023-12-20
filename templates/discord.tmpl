@@ -1,10 +1,7 @@
 Build `{{ .Build.Number }}` triggered by `{{ .Build.Event }}` on `{{ .Commit.Branch }}`
 
-Took `{{ .Build.Duration }}`
+Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName -}}`
 
-Commit: `{{ .Commit.Message }}`
-
-Author: `{{ .Commit.AuthorName -}}`
 {{- if .Commit.Author -}}
     (`{{- .Commit.Author -}}`)
 {{- end }}
