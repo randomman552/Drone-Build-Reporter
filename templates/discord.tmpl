@@ -5,3 +5,11 @@ Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName 
 {{- if .Commit.Author -}}
     (`{{- .Commit.Author -}}`)
 {{- end }}
+
+{{- define "title" -}}
+    {{- if eq .Build.Status "success" -}}
+        :green_square: Build {{ .Build.Status }} after {{ .Build.Duration }}
+    {{- else -}}
+        :red_square: Build {{ .Build.Status }} after {{ .Build.Duration }}
+    {{- end -}}
+{{- end -}}

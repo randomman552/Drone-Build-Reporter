@@ -19,29 +19,27 @@ type DiscordReporter struct {
 func (r DiscordReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer {
 	templatePath := path.Join(r.Config.TemplateDirectory, "discord.tmpl")
 	tplate, err := template.ParseFiles(templatePath)
+	templateBuffer := &bytes.Buffer{}
 
 	if err != nil {
 		panic(err)
 	}
 
 	// Build markdown from template
-	messageBuffer := &bytes.Buffer{}
-	tplate.Execute(messageBuffer, context)
-	messageBytes, _ := io.ReadAll(messageBuffer)
-	messageString := string(messageBytes)
+	tplate.Execute(templateBuffer, context)
+	message := templateBuffer.String()
+
+	// Build title from template
+	tplate.ExecuteTemplate(templateBuffer, "title", context)
+	title := templateBuffer.String()
 
 	// Build JSON request
-	buildTitle := "Build :thumbs_up: after " + context.Build.Duration.String()
-	if context.Build.Status != "success" {
-		buildTitle = "Build :thumbs_down: after " + context.Build.Duration.String()
-	}
 	request := discord.NewWebhook()
-	request.AppendEmbed(*discord.NewEmbed(buildTitle, messageString))
+	request.AppendEmbed(*discord.NewEmbed(title, message))
 
 	// Package request body in a bytes buffer
 	requestBuffer := &bytes.Buffer{}
 	json.NewEncoder(requestBuffer).Encode(request)
-	log.Println(requestBuffer.String())
 
 	return requestBuffer
 }
