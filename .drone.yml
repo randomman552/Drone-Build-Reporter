@@ -29,14 +29,14 @@ steps:
 
   # Build latest
   - name: docker-image-latest
-    image: plugins/docker
+    image: plugins/docke
     environment:
       DOCKER_BUILDKIT: 1
     settings:
       username:
         from_secret: docker-user
       password:
-        from_secret: docker-ke
+        from_secret: docker-key
       repo: randomman552/drone-build-reporter
       tags:
         - latest
