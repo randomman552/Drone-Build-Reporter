@@ -31,8 +31,12 @@ func (r DiscordReporter) RenderTemplate(context types.DroneContext) *bytes.Buffe
 	messageString := string(messageBytes)
 
 	// Build JSON request
+	buildTitle := "Build :thumbs_up:"
+	if context.Build.Status != "success" {
+		buildTitle = "Build :thumbs_down:"
+	}
 	request := discord.NewWebhook()
-	request.AppendEmbed(*discord.NewEmbed("Build "+context.Build.Status, messageString))
+	request.AppendEmbed(*discord.NewEmbed(buildTitle, messageString))
 
 	// Package request body in a bytes buffer
 	requestBuffer := &bytes.Buffer{}
