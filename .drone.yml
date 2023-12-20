@@ -10,7 +10,7 @@ trigger:
 steps:
   # Build
   - name: docker-image
-    image: plugins/docker
+    image: plugins/docke
     environment:
       DOCKER_BUILDKIT: 1
     settings:
