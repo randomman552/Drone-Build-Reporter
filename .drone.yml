@@ -36,7 +36,7 @@ steps:
       username:
         from_secret: docker-user
       password:
-        from_secret: docker-key
+        from_secret: docker-ke
       repo: randomman552/drone-build-reporter
       tags:
         - latest
