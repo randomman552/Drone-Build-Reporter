@@ -14,5 +14,9 @@ Author: {{ .Commit.AuthorName -}}
 [View source]({{ .Repo.Link }})
 
 {{- define "title" -}}
-    CI Pipeline {{ .Build.Status }} for {{ .Repo.Namespace }}/{{ .Repo.Name }} 
+    {{- if eq .Build.Status "success" -}}
+        🟩 Build {{ .Build.Status }} after {{ .Build.Duration }}
+    {{- else -}}
+        🟥 Build {{ .Build.Status }} after {{ .Build.Duration }}
+    {{- end -}}
 {{- end -}}
