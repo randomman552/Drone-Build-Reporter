@@ -1,0 +1,18 @@
+Build {{ .Build.Number }} triggered by {{ .Build.Event }} on {{ .Repo.Branch }}
+
+Took {{ .Build.Duration }}
+
+Commit: [{{ .Commit.Message }}]({{ .Commit.Link }})
+
+Author: {{ .Commit.AuthorName -}}
+{{- if .Commit.Author }}
+    ({{- .Commit.Author -}})
+{{- end }}
+
+[View build]({{ .Build.Link }})
+
+[View source]({{ .Repo.Link }})
+
+{{- define "title" -}}
+    CI Pipeline {{ .Build.Status }} for {{ .Repo.Namespace }}/{{ .Repo.Name }} 
+{{- end -}}
