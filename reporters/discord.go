@@ -43,6 +43,7 @@ func (r DiscordReporter) RenderTemplate(context types.DroneContext) *bytes.Buffe
 	// Package request body in a bytes buffer
 	requestBuffer := &bytes.Buffer{}
 	json.NewEncoder(requestBuffer).Encode(request)
+	log.Println(requestBuffer.String())
 
 	return requestBuffer
 }
