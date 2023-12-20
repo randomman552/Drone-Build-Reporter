@@ -26,6 +26,7 @@ type BuildContext struct {
 
 type CommitContext struct {
 	Hash         string
+	Branch       string
 	Before       string
 	After        string
 	Author       string

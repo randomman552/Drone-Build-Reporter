@@ -22,6 +22,7 @@ func main() {
 			EnvVar: "PLUGIN_TEMPLATE_DIRECTORY",
 			Value:  "./templates",
 		},
+		// Gotify
 		cli.StringFlag{
 			Name:   "config.gotify.token",
 			EnvVar: "PLUGIN_GOTIFY_TOKEN",
@@ -29,6 +30,11 @@ func main() {
 		cli.StringFlag{
 			Name:   "config.gotify.url",
 			EnvVar: "PLUGIN_GOTIFY_URL",
+		},
+		// Discord
+		cli.StringFlag{
+			Name:   "config.discord.webhook",
+			EnvVar: "PLUGIN_DISCORD_WEBHOOK",
 		},
 		// Build context parameters
 		cli.StringFlag{
@@ -75,6 +81,10 @@ func main() {
 		cli.StringFlag{
 			Name:   "commit.hash",
 			EnvVar: "DRONE_COMMIT_SHA",
+		},
+		cli.StringFlag{
+			Name:   "commit.branch",
+			EnvVar: "DRONE_COMMIT_BRANCH",
 		},
 		cli.StringFlag{
 			Name:   "commit.before",
@@ -172,6 +182,7 @@ func run(c *cli.Context) {
 			TemplateDirectory: c.String("config.template_directory"),
 			GotifyToken:       c.String("config.gotify.token"),
 			GotifyUrl:         c.String("config.gotify.url"),
+			DiscordWebhook:    c.String("config.discord.webhook"),
 		},
 		Context: types.DroneContext{
 			Build: types.BuildContext{
@@ -189,6 +200,7 @@ func run(c *cli.Context) {
 			},
 			Commit: types.CommitContext{
 				Hash:         c.String("commit.hash"),
+				Branch:       c.String("commit.branch"),
 				Before:       c.String("commit.before"),
 				After:        c.String("commit.after"),
 				Author:       c.String("commit.author"),

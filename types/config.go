@@ -7,4 +7,6 @@ type Config struct {
 	GotifyToken string
 	// URL of gotify installation, should include scheme https://
 	GotifyUrl string
+	// Discord webhook to call
+	DiscordWebhook string
 }
