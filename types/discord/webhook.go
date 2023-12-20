@@ -20,12 +20,14 @@ func (w *Webhook) AppendEmbed(embed Embed) {
 type Embed struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
+	Url         string `json:"url"`
 }
 
 // Create a new Discord Webhook Embed
-func NewEmbed(title string, description string) *Embed {
+func NewEmbed(title string, description string, url string) *Embed {
 	return &Embed{
 		Title:       title,
 		Description: description,
+		Url:         url,
 	}
 }
