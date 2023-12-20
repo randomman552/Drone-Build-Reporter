@@ -20,7 +20,7 @@ steps:
         from_secret: docker-key
       repo: randomman552/drone-build-reporter
       tags:
-        - $DRONE_COMMIT_BRANCH
+        - ${DRONE_COMMIT_BRANCH}
     when:
       branch:
         exclude:
@@ -40,7 +40,7 @@ steps:
       repo: randomman552/drone-build-reporter
       tags:
         - latest
-        - $DRONE_COMMIT_BRANCH
+        - ${DRONE_COMMIT_BRANCH}
     when:
       branch:
         - main
@@ -48,7 +48,7 @@ steps:
 
   # Reporting
   - name: build-reporter
-    image: randomman552/drone-build-reporter:$DRONE_COMMIT_BRANCH
+    image: randomman552/drone-build-reporter:${DRONE_COMMIT_BRANCH}
     settings:
       gotify_token:
         from_secret: gotify-token
