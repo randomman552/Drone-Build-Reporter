@@ -83,6 +83,10 @@ func main() {
 			EnvVar: "DRONE_COMMIT_SHA",
 		},
 		cli.StringFlag{
+			Name:   "commit.branch",
+			EnvVar: "DRONE_COMMIT_BRANCH",
+		},
+		cli.StringFlag{
 			Name:   "commit.before",
 			EnvVar: "DRONE_COMMIT_BEFORE",
 		},
@@ -196,6 +200,7 @@ func run(c *cli.Context) {
 			},
 			Commit: types.CommitContext{
 				Hash:         c.String("commit.hash"),
+				Branch:       c.String("commit.branch"),
 				Before:       c.String("commit.before"),
 				After:        c.String("commit.after"),
 				Author:       c.String("commit.author"),
