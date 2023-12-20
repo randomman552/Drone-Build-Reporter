@@ -14,6 +14,8 @@ To use this plugin, add the following step to your pipline
       from_secret: gotify-token
     gotify_url:
       from_secret: gotify-url
+    discord_webhook:
+      from_secret: discord-webhook
 
 ```
 
@@ -21,7 +23,8 @@ To use this plugin, add the following step to your pipline
 Currently this plugin only reports to a gotify instance, but I plan to add more sources when I need. E.g. Discord Webhook, MS Teams Webhook
 
 ## Configuration
-| Variable     | Default | Description                                          |
-|:------------:|:-------:|:----------------------------------------------------:|
-| gotify_token |         | Token used when sending gotify messages              |
-| gotify_url   |         |  URL of gotify instance, including scheme (https://) |
+| Variable          | Default | Description                                           |
+|:-----------------:|:-------:|:-----------------------------------------------------:|
+| gotify_token      |         | Token used when sending gotify messages               |
+| gotify_url        |         |  URL of gotify instance, including scheme (https://)  |
+| discord_webhook   |         |  Discord webhook to call, including scheme (https://) |
