@@ -2,12 +2,12 @@ kind: pipeline
 type: docker
 name: Push Image
 
-trigger:
-  branch:
-    - main
-  event:
-    exclude:
-      - pull_request
+# trigger:
+#   branch:
+#     - main
+#   event:
+#     exclude:
+#       - pull_request
 
 steps:
   # Build
