@@ -14,6 +14,7 @@ func (p Plugin) Run() {
 	reporters := []types.Reporter{
 		reporters.ConsoleReporter{Config: p.Config},
 		reporters.GotifyReporter{Config: p.Config},
+		reporters.DiscordReporter{Config: p.Config},
 	}
 
 	for _, reporter := range reporters {
