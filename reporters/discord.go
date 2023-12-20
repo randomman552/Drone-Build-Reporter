@@ -20,8 +20,6 @@ func (r DiscordReporter) RenderTemplate(context types.DroneContext) *bytes.Buffe
 	templatePath := path.Join(r.Config.TemplateDirectory, "discord.tmpl")
 	tplate, err := template.ParseFiles(templatePath)
 
-	log.Println(templatePath)
-
 	if err != nil {
 		panic(err)
 	}
@@ -61,6 +59,7 @@ func (r DiscordReporter) BuildRequest(context types.DroneContext) *http.Request 
 func (r DiscordReporter) Report(context types.DroneContext) {
 	if len((r.Config.DiscordWebhook)) <= 0 {
 		log.Println(("Missing Discord Webhook"))
+		return
 	}
 
 	request := r.BuildRequest(context)
