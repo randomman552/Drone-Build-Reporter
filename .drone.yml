@@ -27,7 +27,7 @@ steps:
           - main
           - master
 
-    # Build latest
+  # Build latest
   - name: docker-image-latest
     image: plugins/docker
     environment:
@@ -56,3 +56,7 @@ steps:
         from_secret: gotify-url
       discord_webhook:
         from_secret: discord-webhook
+    when:
+      stats:
+        - failure
+        - success
