@@ -6,5 +6,5 @@ Commit: `{{ .Commit.Message }}`
 
 Author: `{{ .Commit.AuthorName -}}`
 {{- if .Commit.Author -}}
-    ({{- .Commit.Author -}})
+    (`{{- .Commit.Author -}}`)
 {{- end }}
