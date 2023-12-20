@@ -1,17 +1,11 @@
-Build {{ .Build.Number }} triggered by {{ .Build.Event }} on {{ .Commit.Branch }}
+Build [`{{ .Build.Number }}`]({{ .Build.Link }}) triggered by `{{ .Build.Event }}` on `{{ .Commit.Branch }}`
 
-Took {{ .Build.Duration }}
-
-Commit: [{{ .Commit.Message }}]({{ .Commit.Link }})
-
-Author: {{ .Commit.AuthorName -}}
-{{- if .Commit.Author }}
-    ({{- .Commit.Author -}})
+Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName -}}`
+{{- if .Commit.Author -}}
+    (`{{- .Commit.Author -}}`)
 {{- end }}
 
-[View build]({{ .Build.Link }})
-
-[View source]({{ .Repo.Link }})
+Repo: [`{{ .Repo.Namespace }}/{{ .Repo.Name }}`]({{ .Repo.Link }})
 
 {{- define "title" -}}
     {{- if eq .Build.Status "success" -}}
