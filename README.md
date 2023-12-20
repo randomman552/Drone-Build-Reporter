@@ -1,5 +1,5 @@
 # Drone-Build-Reporter
-[![Build Status](https://drone.ggrainger.uk/api/badges/randomman552/Drone-Build-Reporter/status.svg)](https://drone.ggrainger.uk/randomman552/Drone-Build-Reporter)
+[![Build Status](https://drone.ggrainger.uk/api/badges/randomman552/Drone-Build-Reporter/status.svg?ref=refs/heads/main)](https://drone.ggrainger.uk/randomman552/Drone-Build-Reporter)
 
 Plugin for [Drone CI](https://www.drone.io/) to send information about builds to multiple sources.
 
