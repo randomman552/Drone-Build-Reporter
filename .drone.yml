@@ -57,6 +57,6 @@ steps:
       discord_webhook:
         from_secret: discord-webhook
     when:
-      stats:
+      status:
         - failure
         - success
