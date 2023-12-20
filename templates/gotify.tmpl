@@ -1,3 +1,11 @@
+{{- define "title" -}}
+    {{- if eq .Build.Status "success" -}}
+        🟩 Build {{ .Build.Status }} after {{ .Build.Duration }}
+    {{- else -}}
+        🟥 Build {{ .Build.Status }} after {{ .Build.Duration }}
+    {{- end -}}
+{{- end -}}
+
 Build [`{{ .Build.Number }}`]({{ .Build.Link }}) triggered by `{{ .Build.Event }}` on `{{ .Commit.Branch }}`
 
 Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName -}}`
@@ -6,11 +14,3 @@ Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName 
 {{- end }}
 
 Repo: [`{{ .Repo.Namespace }}/{{ .Repo.Name }}`]({{ .Repo.Link }})
-
-{{- define "title" -}}
-    {{- if eq .Build.Status "success" -}}
-        🟩 Build {{ .Build.Status }} after {{ .Build.Duration }}
-    {{- else -}}
-        🟥 Build {{ .Build.Status }} after {{ .Build.Duration }}
-    {{- end -}}
-{{- end -}}
