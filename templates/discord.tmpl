@@ -1,11 +1,3 @@
-Build `{{ .Build.Number }}` triggered by `{{ .Build.Event }}` on `{{ .Commit.Branch }}`
-
-Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName -}}`
-
-{{- if .Commit.Author -}}
-    (`{{- .Commit.Author -}}`)
-{{- end }}
-
 {{- define "title" -}}
     {{- if eq .Build.Status "success" -}}
         :green_square: Build {{ .Build.Status }} after {{ .Build.Duration }}
@@ -13,3 +5,13 @@ Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName 
         :red_square: Build {{ .Build.Status }} after {{ .Build.Duration }}
     {{- end -}}
 {{- end -}}
+
+Build `[{{ .Build.Number }}]({{ .Build.Link }})` triggered by `{{ .Build.Event }}` on `{{ .Commit.Branch }}`
+
+Commit: [`{{ .Commit.Message }}`]({{ .Commit.Link }}) by `{{ .Commit.AuthorName -}}`
+
+{{- if .Commit.Author -}}
+    (`{{- .Commit.Author -}}`)
+{{- end }}
+
+Repo: [`{{ .Repo.Namespace }}/{{ .Repo.name }}`]({{ .Repo.Link }})
