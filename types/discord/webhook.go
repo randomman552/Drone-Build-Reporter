@@ -1,19 +1,31 @@
 package discord
 
 type Webhook struct {
-	Content    string        `json:"content"`
-	Components []interface{} `json:"components"`
+	Embeds []Embed `json:"embeds"`
 }
 
 // Create a new Webhook message with the given content
-func NewWebhook(content string) *Webhook {
+func NewWebhook() *Webhook {
 	return &Webhook{
-		Content:    content,
-		Components: []interface{}{},
+		Embeds: []Embed{},
 	}
 }
 
-// Add a component to the webhook components
-func (w *Webhook) AppendComponent(component interface{}) {
-	w.Components = append(w.Components, component)
+// Add an Embed to the webhook Embeds
+func (w *Webhook) AppendEmbed(embed Embed) {
+	w.Embeds = append(w.Embeds, embed)
+}
+
+// Struct representing a discord Webhook embed
+type Embed struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+}
+
+// Create a new Discord Webhook Embed
+func NewEmbed(title string, description string) *Embed {
+	return &Embed{
+		Title:       title,
+		Description: description,
+	}
 }

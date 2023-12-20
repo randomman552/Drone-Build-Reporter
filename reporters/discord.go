@@ -30,15 +30,9 @@ func (r DiscordReporter) RenderTemplate(context types.DroneContext) *bytes.Buffe
 	messageBytes, _ := io.ReadAll(messageBuffer)
 	messageString := string(messageBytes)
 
-	// Build links for message
-	actionRow := discord.NewActionRow()
-	actionRow.AppendComponent(discord.NewButton("View Commit", context.Commit.Link))
-	actionRow.AppendComponent(discord.NewButton("View Build", context.Build.Link))
-	actionRow.AppendComponent(discord.NewButton("View Repo", context.Repo.Link))
-
 	// Build JSON request
-	request := discord.NewWebhook(messageString)
-	request.AppendComponent(actionRow)
+	request := discord.NewWebhook()
+	request.AppendEmbed(*discord.NewEmbed("Build Report", messageString))
 
 	// Package request body in a bytes buffer
 	requestBuffer := &bytes.Buffer{}
