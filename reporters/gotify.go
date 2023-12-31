@@ -39,7 +39,7 @@ func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer
 	tplate, err := template.ParseFiles(templatePath)
 
 	if err != nil {
-		log.Fatalf("Error parsing template: %s", err)
+		log.Fatalf("Error parsing Gotify template: %s", err)
 		return nil
 	}
 
@@ -88,7 +88,7 @@ func (r GotifyReporter) BuildRequest(context types.DroneContext) *http.Request {
 	request, err := http.NewRequest("POST", url.String(), body)
 
 	if err != nil {
-		log.Fatalf("Error building request: %s", err)
+		log.Fatalf("Error building Gotify request: %s", err)
 		return nil
 	}
 
@@ -98,12 +98,8 @@ func (r GotifyReporter) BuildRequest(context types.DroneContext) *http.Request {
 }
 
 func (r GotifyReporter) Report(context types.DroneContext) {
-	if len(r.Config.GotifyUrl) <= 0 {
-		log.Println("Missing Gotify URL")
-		return
-	}
-	if len(r.Config.GotifyToken) <= 0 {
-		log.Println("Missing Gotify token")
+	if len(r.Config.GotifyUrl) <= 0 || len(r.Config.GotifyToken) <= 0 {
+		log.Println("Missing gotify parameters... skipping...")
 		return
 	}
 
@@ -116,13 +112,13 @@ func (r GotifyReporter) Report(context types.DroneContext) {
 	response, err := client.Do(request)
 
 	if err != nil {
-		log.Fatalf("Error making request: %s", err)
+		log.Fatalf("Gotify request error: %s", err)
 		return
 	}
 
 	if response.StatusCode != 200 {
 		body, _ := io.ReadAll(response.Body)
-		log.Fatal(response.Status, " - ", string(body))
+		log.Fatalf("Gotify request error: %s - %s", response.Status, body)
 	}
 
 	response.Body.Close()
