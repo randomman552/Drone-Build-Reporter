@@ -20,7 +20,7 @@ func (r GotifyReporter) GetUrl() *url.URL {
 	url, err := url.Parse(r.Config.GotifyUrl)
 
 	if err != nil {
-		log.Fatalf("Error parsing gotify url: %s", err)
+		log.Printf("Error parsing gotify url: %s", err)
 		return nil
 	}
 
@@ -39,7 +39,7 @@ func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer
 	tplate, err := template.ParseFiles(templatePath)
 
 	if err != nil {
-		log.Fatalf("Error parsing Gotify template: %s", err)
+		log.Printf("Error parsing Gotify template: %s", err)
 		return nil
 	}
 
@@ -88,7 +88,7 @@ func (r GotifyReporter) BuildRequest(context types.DroneContext) *http.Request {
 	request, err := http.NewRequest("POST", url.String(), body)
 
 	if err != nil {
-		log.Fatalf("Error building Gotify request: %s", err)
+		log.Printf("Error building Gotify request: %s", err)
 		return nil
 	}
 
@@ -112,13 +112,13 @@ func (r GotifyReporter) Report(context types.DroneContext) {
 	response, err := client.Do(request)
 
 	if err != nil {
-		log.Fatalf("Gotify request error: %s", err)
+		log.Printf("Gotify request error: %s", err)
 		return
 	}
 
 	if response.StatusCode != 200 {
 		body, _ := io.ReadAll(response.Body)
-		log.Fatalf("Gotify request error: %s - %s", response.Status, body)
+		log.Printf("Gotify request error: %s - %s", response.Status, body)
 	}
 
 	response.Body.Close()
