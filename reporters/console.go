@@ -1,6 +1,7 @@
 package reporters
 
 import (
+	"log"
 	"os"
 	"path"
 	"reporter/types"
@@ -16,12 +17,14 @@ func (c ConsoleReporter) Report(context types.DroneContext) {
 	tplate, err := template.ParseFiles(templatePath)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error reading console template: %s", err)
+		return
 	}
 
 	err = tplate.Execute(os.Stdout, context)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error rendering console template: %s", err)
+		return
 	}
 }
