@@ -20,7 +20,8 @@ func (r GotifyReporter) GetUrl() *url.URL {
 	url, err := url.Parse(r.Config.GotifyUrl)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error parsing gotify url: %s", err)
+		return nil
 	}
 
 	url = url.JoinPath("/message")
@@ -38,7 +39,8 @@ func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer
 	tplate, err := template.ParseFiles(templatePath)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error parsing Gotify template: %s", err)
+		return nil
 	}
 
 	// Build markdown from template
@@ -78,10 +80,16 @@ func (r GotifyReporter) RenderTemplate(context types.DroneContext) *bytes.Buffer
 func (r GotifyReporter) BuildRequest(context types.DroneContext) *http.Request {
 	url := r.GetUrl()
 	body := r.RenderTemplate(context)
+
+	if url == nil || body == nil {
+		return nil
+	}
+
 	request, err := http.NewRequest("POST", url.String(), body)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error building Gotify request: %s", err)
+		return nil
 	}
 
 	request.Header.Set("Content-Type", "application/json")
@@ -90,27 +98,27 @@ func (r GotifyReporter) BuildRequest(context types.DroneContext) *http.Request {
 }
 
 func (r GotifyReporter) Report(context types.DroneContext) {
-	if len(r.Config.GotifyUrl) <= 0 {
-		log.Println("Missing Gotify URL")
-		return
-	}
-	if len(r.Config.GotifyToken) <= 0 {
-		log.Println("Missing Gotify token")
+	if len(r.Config.GotifyUrl) <= 0 || len(r.Config.GotifyToken) <= 0 {
+		log.Println("Missing gotify parameters... skipping...")
 		return
 	}
 
 	request := r.BuildRequest(context)
+	if request == nil {
+		return
+	}
 
 	client := http.Client{}
 	response, err := client.Do(request)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Gotify request error: %s", err)
+		return
 	}
 
 	if response.StatusCode != 200 {
 		body, _ := io.ReadAll(response.Body)
-		log.Fatal(response.Status, " - ", string(body))
+		log.Printf("Gotify request error: %s - %s", response.Status, body)
 	}
 
 	response.Body.Close()

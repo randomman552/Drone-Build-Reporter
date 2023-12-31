@@ -22,7 +22,8 @@ func (r DiscordReporter) RenderTemplate(context types.DroneContext) *bytes.Buffe
 	buffer := &bytes.Buffer{}
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error parsing discord template: %s", err)
+		return nil
 	}
 
 	// Build markdown from template
@@ -47,10 +48,15 @@ func (r DiscordReporter) RenderTemplate(context types.DroneContext) *bytes.Buffe
 func (r DiscordReporter) BuildRequest(context types.DroneContext) *http.Request {
 	url := r.Config.DiscordWebhook
 	body := r.RenderTemplate(context)
+	if body == nil {
+		return nil
+	}
+
 	request, err := http.NewRequest("POST", url, body)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error building discord webhook request")
+		return nil
 	}
 
 	request.Header.Set("Content-Type", "application/json")
@@ -60,7 +66,7 @@ func (r DiscordReporter) BuildRequest(context types.DroneContext) *http.Request 
 
 func (r DiscordReporter) Report(context types.DroneContext) {
 	if len((r.Config.DiscordWebhook)) <= 0 {
-		log.Println(("Missing Discord Webhook"))
+		log.Println(("Missing Discord Webhook... skipping..."))
 		return
 	}
 
@@ -70,12 +76,13 @@ func (r DiscordReporter) Report(context types.DroneContext) {
 	response, err := client.Do(request)
 
 	if err != nil {
-		panic(err)
+		log.Printf("Error completing discord webhook request: %s", err)
+		return
 	}
 
 	if response.StatusCode != 204 {
 		body, _ := io.ReadAll(response.Body)
-		log.Fatal(response.Status, " - ", string(body))
+		log.Printf("Error completing discord webhook request: %s - %s", response.Status, string(body))
 	}
 
 	response.Body.Close()
