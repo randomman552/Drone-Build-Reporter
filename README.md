@@ -10,8 +10,9 @@ To use this plugin, add the following step to your pipline
 - name: build-reporter
   image: randomman552/drone-build-reporter
   settings:
-    discord_webhook:
-      from_secret: discord-webhook
+    # Your settings here
+    variable:
+      from_secret: variable
   when:
     status:
       - failure
@@ -23,10 +24,11 @@ To only trigger the pipeline on a failure, you can remove the success case from 
 ```yaml
 # Report failures only
 - name: build-reporter
-  image: randomman552/drone-build-reporter:${DRONE_COMMIT_BRANCH}
+  image: randomman552/drone-build-reporter
   settings:
-    discord_webhook:
-      from_secret: discord-webhook
+    # Your settings here
+    variable:
+      from_secret: variable
   when:
     status:
       - failure
@@ -40,4 +42,4 @@ This plugin currently supports the following platforms:
   - `gotify_token` the token from the gotify instance
   - `gotify_url` Url of the gotify instance, including scheme (e.g. `https://gotify.example.com`)
 - Discord
-  - `discord_webhook` The webhook to send the report tos
+  - `discord_webhook` The webhook to send the report to
