@@ -60,9 +60,3 @@ steps:
       status:
         - failure
         - success
-
-  # Cleanup old images
-  - name: cleanup
-    image: plugins/docker
-    commands:
-      - docker rmi --force $(docker images -q 'randomman552/drone-build-reporter' | uniq)
