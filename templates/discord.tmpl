@@ -1,10 +1,10 @@
 {{- define "title" -}}
-    {{- if eq .Build.Status "success" -}}
+    {{- if eq .NotifyMode "started" -}}
+        :blue_square: Build started
+    {{- else if eq .Build.Status "success" -}}
         :green_square: Build {{ .Build.Status }} after {{ .Build.Duration }}
     {{- else if eq .Build.Status "failure" -}}
         :red_square: Build {{ .Build.Status }} after {{ .Build.Duration }}
-    {{- else -}}
-        :blue_square: Build in progress
     {{- end -}}
 {{- end -}}
 

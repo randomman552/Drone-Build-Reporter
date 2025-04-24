@@ -22,6 +22,11 @@ func main() {
 			EnvVar: "PLUGIN_TEMPLATE_DIRECTORY",
 			Value:  "./templates",
 		},
+		cli.StringFlag{
+			Name:   "config.notify_mode",
+			EnvVar: "PLUGIN_NOTIFY_MODE",
+			Value:  string(types.Finished),
+		},
 		// Gotify
 		cli.StringFlag{
 			Name:   "config.gotify.token",
@@ -183,6 +188,7 @@ func run(c *cli.Context) {
 			GotifyToken:       c.String("config.gotify.token"),
 			GotifyUrl:         c.String("config.gotify.url"),
 			DiscordWebhook:    c.String("config.discord.webhook"),
+			NotifyMode:        types.NotifyMode(c.String("config.notify_mode")),
 		},
 		Context: types.DroneContext{
 			Build: types.BuildContext{
@@ -222,6 +228,7 @@ func run(c *cli.Context) {
 			},
 			FailedStages: c.StringSlice("failed_stages"),
 			FailedSteps:  c.StringSlice("failed_steps"),
+			NotifyMode:   types.NotifyMode(c.String("config.notify_mode")),
 		},
 	}
 
