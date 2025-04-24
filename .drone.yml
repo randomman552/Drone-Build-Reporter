@@ -46,7 +46,7 @@ steps:
         - main
         - master
 
-  # Reporting
+  # Report finished
   - name: build-reporter
     image: randomman552/drone-build-reporter:${DRONE_COMMIT_BRANCH}
     settings:
@@ -60,3 +60,9 @@ steps:
       status:
         - failure
         - success
+
+  # Cleanup old images
+  - name: cleanup
+    image: plugins/docker
+    commands:
+      - docker rmi --force $(docker images -q 'randomman552/drone-build-reporter' | uniq)
