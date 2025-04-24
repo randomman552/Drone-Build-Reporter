@@ -37,7 +37,14 @@ To only trigger the pipeline on a failure, you can remove the success case from 
 ## Available platforms
 All configuration options should be passed through the step settings as shown for the example above.
 
-This plugin currently supports the following platforms:
+Values can be passed from secrets, or directly as strings. Care should be taken to use secrets where appropriate (API tokens, etc)
+
+Global settings:
+- `notify_mode` - Controls when in the process the CI this plugin runs
+  - `finished` - Notify at the conclusion of the CI process (default)
+  - `started` - Notify at the start of the CI process
+
+Platform specific:
 - Gotify
   - `gotify_token` the token from the gotify instance
   - `gotify_url` Url of the gotify instance, including scheme (e.g. `https://gotify.example.com`)

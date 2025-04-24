@@ -8,6 +8,7 @@ type DroneContext struct {
 	Repo         RepoContext
 	FailedStages []string
 	FailedSteps  []string
+	NotifyMode   NotifyMode
 }
 
 type BuildContext struct {

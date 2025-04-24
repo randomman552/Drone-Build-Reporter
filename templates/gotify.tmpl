@@ -1,5 +1,7 @@
 {{- define "title" -}}
-    {{- if eq .Build.Status "success" -}}
+    {{- if eq .NotifyMode "started" -}}
+        🟦 Build started
+    {{- else if eq .Build.Status "success" -}}
         🟩 Build {{ .Build.Status }} after {{ .Build.Duration }}
     {{- else -}}
         🟥 Build {{ .Build.Status }} after {{ .Build.Duration }}

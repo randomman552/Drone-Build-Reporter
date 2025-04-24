@@ -9,7 +9,7 @@ trigger:
 
 steps:
   # Build
-  - name: docker-image
+  - name: docker-image-test
     image: plugins/docker
     environment:
       DOCKER_BUILDKIT: 1
@@ -22,6 +22,27 @@ steps:
       tags:
         - ${DRONE_COMMIT_BRANCH}
     when:
+      branch:
+        exclude:
+          - main
+          - master
+          
+  # Test build started message
+  - name: test-build-started
+    image: randomman552/drone-build-reporter:${DRONE_COMMIT_BRANCH}
+    pull: always
+    settings:
+      gotify_token:
+        from_secret: gotify-token
+      gotify_url:
+        from_secret: gotify-url
+      discord_webhook:
+        from_secret: discord-webhook
+      notify_mode: started
+    when:
+      status:
+        - failure
+        - success
       branch:
         exclude:
           - main
@@ -46,9 +67,10 @@ steps:
         - main
         - master
 
-  # Reporting
-  - name: build-reporter
+  # Report finished
+  - name: report-finished
     image: randomman552/drone-build-reporter:${DRONE_COMMIT_BRANCH}
+    pull: always
     settings:
       gotify_token:
         from_secret: gotify-token
