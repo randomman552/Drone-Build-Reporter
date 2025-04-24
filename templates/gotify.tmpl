@@ -1,8 +1,10 @@
 {{- define "title" -}}
     {{- if eq .Build.Status "success" -}}
         🟩 Build {{ .Build.Status }} after {{ .Build.Duration }}
-    {{- else -}}
+    {{- else if eq .Build.Status "failure" -}}
         🟥 Build {{ .Build.Status }} after {{ .Build.Duration }}
+    {{- else -}}
+        🟦 Build in progress
     {{- end -}}
 {{- end -}}
 
