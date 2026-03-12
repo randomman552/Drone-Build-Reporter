@@ -1,6 +1,4 @@
 # Drone-Build-Reporter
-[![Build Status](https://drone.ggrainger.uk/api/badges/randomman552/Drone-Build-Reporter/status.svg?ref=refs/heads/main)](https://drone.ggrainger.uk/randomman552/Drone-Build-Reporter)
-
 Plugin for [Drone CI](https://www.drone.io/) to send information about builds to multiple sources.
 
 ## Usage
@@ -8,7 +6,7 @@ To use this plugin, add the following step to your pipline
 ```yaml
 # Report all builds
 - name: build-reporter
-  image: randomman552/drone-build-reporter
+  image: ghcr.io/randomman552/drone-build-reporter
   settings:
     # Your settings here
     variable:
@@ -24,7 +22,7 @@ To only trigger the pipeline on a failure, you can remove the success case from 
 ```yaml
 # Report failures only
 - name: build-reporter
-  image: randomman552/drone-build-reporter
+  image: ghcr.io/randomman552/drone-build-reporter
   settings:
     # Your settings here
     variable:
